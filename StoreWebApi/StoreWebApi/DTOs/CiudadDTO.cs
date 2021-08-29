@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace StoreWebApi.DTOs
+namespace StoreWebApi.Models
 {
     public  class CiudadDTO
     {
@@ -9,6 +9,6 @@ namespace StoreWebApi.DTOs
         public int CiudadId { get; set; }
         public string CiudadNombre { get; set; }
 
-        public List<ClimaDTO> Clima { get; set; }
+        public List<Clima> Clima { get; set; }
     }
 }

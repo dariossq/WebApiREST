@@ -13,15 +13,18 @@ namespace StoreWebApi.DTOs
         {
             Mapper.Initialize(cfg =>
             {
+                cfg.CreateMap<Ciudad, CiudadDTO>()
+                .ForMember(x => x.Clima, o => o.Ignore())
+                 .ReverseMap();
+
+                cfg.CreateMap<Clima, ClimaDTO>()
+                .ForMember(x => x.Noticia, o => o.Ignore())
+                .ReverseMap();
 
                 cfg.CreateMap<Noticia, NoticiaDTO>()
                     .ReverseMap();
 
-                cfg.CreateMap<Clima, ClimaDTO>()
-                   .ReverseMap();
 
-                cfg.CreateMap<Ciudad, CiudadDTO>()
-                 .ReverseMap();
 
             });
         }

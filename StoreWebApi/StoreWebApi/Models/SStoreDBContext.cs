@@ -15,7 +15,6 @@ namespace StoreWebApi.Models
         {
         }
 
-
         public virtual DbSet<Ciudad> Ciudad { get; set; }
         public virtual DbSet<Clima> Clima { get; set; }
         public virtual DbSet<Noticia> Noticia { get; set; }
@@ -78,10 +77,11 @@ namespace StoreWebApi.Models
 
                 entity.Property(e => e.ClimaVisibilidad).HasColumnName("Clima_Visibilidad");
 
-                //entity.HasOne(d => d.Ciudad)
-                //    .WithMany(p => p.Clima)
-                //    .HasForeignKey(d => d.CiudadId)
-                //    .HasConstraintName("FK_Clima_Ciudad");
+                entity.HasOne(d => d.Ciudad)
+                    .WithMany(p => p.Clima)
+                    .HasForeignKey(d => d.CiudadId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Clima_Ciudad");
             });
 
             modelBuilder.Entity<Noticia>(entity =>
@@ -119,10 +119,10 @@ namespace StoreWebApi.Models
                     .HasColumnName("Noticia_Url")
                     .HasMaxLength(200);
 
-                //entity.HasOne(d => d.Clima)
-                //    .WithMany(p => p.Noticia)
-                //    .HasForeignKey(d => d.ClimaId)
-                //    .HasConstraintName("FK_Noticia_Clima");
+                entity.HasOne(d => d.Clima)
+                    .WithMany(p => p.Noticia)
+                    .HasForeignKey(d => d.ClimaId)
+                    .HasConstraintName("FK_Noticia_Clima");
             });
         }
     }
