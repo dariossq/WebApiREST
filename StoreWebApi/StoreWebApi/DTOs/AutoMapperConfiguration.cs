@@ -20,6 +20,9 @@ namespace StoreWebApi.DTOs
                 cfg.CreateMap<Clima, ClimaDTO>()
                    .ReverseMap();
 
+                cfg.CreateMap<Ciudad, CiudadDTO>()
+                 .ReverseMap();
+
             });
         }
     }

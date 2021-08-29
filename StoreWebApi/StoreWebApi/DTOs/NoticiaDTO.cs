@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StoreWebApi.DTOs
 {
-    public partial class NoticiaDTO
+    public  class NoticiaDTO
     {
         public int NoticiaId { get; set; }
         public string NoticiaAutor { get; set; }
