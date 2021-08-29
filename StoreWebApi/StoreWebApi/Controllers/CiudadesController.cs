@@ -24,29 +24,41 @@ namespace StoreWebApi.Controllers
         [HttpGet]
         public IEnumerable<Ciudad> GetCiudad()
         {
-            return _context.Ciudad;
+            return _context.Ciudad.ToList();
         }
 
-        // GET: api/Ciudades/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCiudad([FromRoute] int id)
+
+        // GET: api/Ciudades/Nombre
+        [HttpGet("{Nombre}")]
+       public Ciudad get(String Nombre)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var ciudad = await _context.Ciudad.FindAsync(id);
-
-            if (ciudad == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(ciudad);
+            var ciudad = _context.Ciudad.FirstOrDefault(p => p.CiudadNombre == Nombre);
+            return ciudad;
         }
 
-        // PUT: api/Ciudades/5
+
+
+        //// GET: api/Ciudades/5
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetCiudad([FromRoute] int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var ciudad = await _context.Ciudad.FindAsync(id);
+
+        //    if (ciudad == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(ciudad);
+        //}
+
+
+        //PUT: api/Ciudades/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCiudad([FromRoute] int id, [FromBody] Ciudad ciudad)
         {
