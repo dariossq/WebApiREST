@@ -27,24 +27,71 @@ namespace StoreWebApi.Controllers
             return _context.Noticia;
         }
 
-        // GET: api/Noticias/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetNoticia([FromRoute] int id)
+        // GET: api/Ciudades/Nombre
+        [HttpGet("{Nombre}")]
+        public Noticia get(String Nombre)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var ciudad = _context.Ciudad.FirstOrDefault(p => p.CiudadNombre == Nombre);
+            //return ciudad;
+            //int ciudadId = ciudad.CiudadId;
 
-            var noticia = await _context.Noticia.FindAsync(id);
+            var clima = _context.Clima.FirstOrDefault(p => p.CiudadId == ciudad.CiudadId);
+            // return clima;
+            var noticia = _context.Noticia.FirstOrDefault(p => p.ClimaId == clima.ClimaId);
+            return noticia;
+            //noticia = _context.Noticia.FirstOrDefault(p =>
+            //                                          p.NoticiaAutor == Nombre);
 
-            if (noticia == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(noticia);
         }
+
+
+        //// GET: api/Ciudades/Nombre
+        //[HttpGet("{Nombre}")]
+        //public Noticia Obtener(string Nombre, int hola)
+        //{
+        //    var noticia = new Noticia();
+        //    try
+        //    {
+
+        //        noticia = _context.Noticia.FirstOrDefault(p =>
+        //                                                  p.NoticiaAutor == Nombre
+        //                                                  .Where(p.ClimaId = hola);
+
+
+
+        //        //noticia = _context.Noticia
+        //        //                    .Include("Noticia")
+        //        //                    .Where(x => x.NoticiaAutor == Nombre)
+        //        //                    .Single();
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+
+        //    return noticia;
+        //}
+
+
+        // GET: api/Noticias/5
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetNoticia([FromRoute] int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var noticia = await _context.Noticia.FindAsync(id);
+
+        //    if (noticia == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(noticia);
+        //}
 
         // PUT: api/Noticias/5
         [HttpPut("{id}")]
