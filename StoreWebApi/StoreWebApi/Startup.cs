@@ -30,7 +30,7 @@ namespace StoreWebApi
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddDbContext<Models.SStoreDBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("StoreDBBContext")));
+                options.UseSqlServer(Configuration.GetConnectionString("SStoreDBContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
