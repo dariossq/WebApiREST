@@ -7,7 +7,7 @@ namespace StoreWebApi.Models
     {
         public Clima()
         {
-            Noticia = new HashSet<Noticia>();
+            Ciudad = new HashSet<Ciudad>();
         }
 
         public int ClimaId { get; set; }
@@ -23,7 +23,7 @@ namespace StoreWebApi.Models
         public int ClimaVisibilidad { get; set; }
         public int? CiudadId { get; set; }
 
-        public Ciudad Ciudad { get; set; }
-        public ICollection<Noticia> Noticia { get; set; }
+        public ICollection<Ciudad> Ciudad { get; set; }
+        //public ICollection<Noticia> Noticia { get; set; }
     }
 }
