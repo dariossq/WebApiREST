@@ -32,12 +32,12 @@ namespace StoreWebApi.Controllers
         public Noticia get(String Nombre)
         {
             var ciudad = _context.Ciudad.FirstOrDefault(p => p.CiudadNombre == Nombre);
-            //return ciudad;
-            //int ciudadId = ciudad.CiudadId;
-
             var clima = _context.Clima.FirstOrDefault(p => p.CiudadId == ciudad.CiudadId);
-            // return clima;
+            var count = _context.Clima.Count();           
+            
+
             var noticia = _context.Noticia.FirstOrDefault(p => p.ClimaId == clima.ClimaId);
+
             return noticia;
             //noticia = _context.Noticia.FirstOrDefault(p =>
             //                                          p.NoticiaAutor == Nombre);
