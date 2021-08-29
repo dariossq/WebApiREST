@@ -9,13 +9,9 @@ namespace StoreWebApi.Models
         public virtual DbSet<Clima> Clima { get; set; }
         public virtual DbSet<Noticia> Noticia { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public SStoreDBContext(DbContextOptions<SStoreDBContext> options) : base(options)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Server= DESKTOP-PIB9MC0\SQLEXPRESS;Database= SStoreDB;Integrated Security=SSPI");
-            }
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
