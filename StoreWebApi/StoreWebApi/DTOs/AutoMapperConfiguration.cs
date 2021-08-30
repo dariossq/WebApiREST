@@ -24,6 +24,9 @@ namespace StoreWebApi.DTOs
                 cfg.CreateMap<Noticia, NoticiaDTO>()
                     .ReverseMap();
 
+                //cfg.CreateMap<Historia, HistoriaDTO>()
+                //   .ReverseMap();
+
 
 
             });

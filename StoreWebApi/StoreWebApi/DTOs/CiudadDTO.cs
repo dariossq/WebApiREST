@@ -9,6 +9,7 @@ namespace StoreWebApi.Models
         public int CiudadId { get; set; }
         public string CiudadNombre { get; set; }
 
+        //public List<Historia> Historia { get; set; }
         public List<Clima> Clima { get; set; }
     }
 }

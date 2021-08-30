@@ -8,11 +8,15 @@ namespace StoreWebApi.Models
         public Ciudad()
         {
             Clima = new HashSet<Clima>();
+            Historia = new HashSet<Historia>();
         }
+
 
         public int CiudadId { get; set; }
         public string CiudadNombre { get; set; }
 
         public ICollection<Clima> Clima { get; set; }
+
+        public ICollection<Historia> Historia { get; set; }
     }
 }

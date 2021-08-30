@@ -33,7 +33,7 @@ namespace StoreWebApi.Controllers
         {
             var ciudad = _context.Ciudad.FirstOrDefault(p => p.CiudadNombre == Nombre);
             var clima = _context.Clima.FirstOrDefault(p => p.CiudadId == ciudad.CiudadId);
-            var count = _context.Clima.Count();           
+            var count = _context.Clima.Count();          
             
 
             var noticia = _context.Noticia.FirstOrDefault(p => p.ClimaId == clima.ClimaId);
