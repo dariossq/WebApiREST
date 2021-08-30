@@ -21,7 +21,9 @@ namespace StoreWebApi.Models
         public int ClimaCubreNube { get; set; }
         public int ClimaMaxmo { get; set; }
         public int ClimaVisibilidad { get; set; }
+        public int CiudadId { get; set; }
 
+        public Ciudad Ciudad { get; set; }
         public ICollection<Noticia> Noticia { get; set; }
     }
 }

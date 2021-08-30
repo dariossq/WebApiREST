@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace StoreWebApi.DTOs
+namespace StoreWebApi.Models
 {
-    public partial class NoticiaDTO
+    public  class NoticiaDTO
     {
         public int NoticiaId { get; set; }
         public string NoticiaAutor { get; set; }
@@ -14,6 +14,6 @@ namespace StoreWebApi.DTOs
         public string NoticiaContenido { get; set; }
         public int? ClimaId { get; set; }
 
-        public List<ClimaDTO> Clima { get; set; }
+        public Clima Clima { get; set; }
     }
 }

@@ -1,38 +1,70 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using StoreWebApi.Models;
 
 namespace StoreWebApi.Models
 {
     public partial class SStoreDBContext : DbContext
     {
+        public SStoreDBContext()
+        {
+        }
+
+        public SStoreDBContext(DbContextOptions<SStoreDBContext> options)
+            : base(options)
+        {
+        }
+
+        public virtual DbSet<Ciudad> Ciudad { get; set; }
         public virtual DbSet<Clima> Clima { get; set; }
         public virtual DbSet<Noticia> Noticia { get; set; }
 
-        public SStoreDBContext(DbContextOptions<SStoreDBContext> options) : base(options)
-        {
+        public DbSet<StoreWebApi.Models.Historia> Historia { get; set; }
 
-        }
+        //public DbSet<StoreWebApi.Models.Historia> Historia { get; set; }
+
+        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //        {
+        //            if (!optionsBuilder.IsConfigured)
+        //            {
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+        //                optionsBuilder.UseSqlServer("Server= DESKTOP-PIB9MC0\\SQLEXPRESS;Database= SStoreDB;Integrated Security=SSPI");
+        //            }
+        //        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Ciudad>(entity =>
+            {
+                entity.Property(e => e.CiudadId).HasColumnName("Ciudad_id");
+
+                entity.Property(e => e.CiudadNombre)
+                    .IsRequired()
+                    .HasColumnName("CIudad_Nombre")
+                    .HasMaxLength(50);
+            });
+
             modelBuilder.Entity<Clima>(entity =>
             {
-                entity.Property(e => e.ClimaId)
-                    .HasColumnName("Clima_Id")
-                    .ValueGeneratedNever();
+                entity.HasIndex(e => e.ClimaId)
+                    .HasName("IX_Clima");
+
+                entity.Property(e => e.ClimaId).HasColumnName("Clima_Id");
+
+                entity.Property(e => e.CiudadId).HasColumnName("Ciudad_Id");
 
                 entity.Property(e => e.ClimaCubreNube).HasColumnName("Clima_Cubre_Nube");
 
                 entity.Property(e => e.ClimaDescripcion)
                     .IsRequired()
                     .HasColumnName("Clima_Descripcion")
-                    .HasColumnType("nchar(100)");
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.ClimaDirViento)
                     .IsRequired()
                     .HasColumnName("Clima_Dir_Viento")
-                    .HasColumnType("nchar(10)");
+                    .HasMaxLength(10);
 
                 entity.Property(e => e.ClimaGradoViento).HasColumnName("Clima_Grado_Viento");
 
@@ -49,6 +81,12 @@ namespace StoreWebApi.Models
                 entity.Property(e => e.ClimaVelViento).HasColumnName("Clima_Vel_Viento");
 
                 entity.Property(e => e.ClimaVisibilidad).HasColumnName("Clima_Visibilidad");
+
+                entity.HasOne(d => d.Ciudad)
+                    .WithMany(p => p.Clima)
+                    .HasForeignKey(d => d.CiudadId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Clima_Ciudad");
             });
 
             modelBuilder.Entity<Noticia>(entity =>
@@ -91,6 +129,70 @@ namespace StoreWebApi.Models
                     .HasForeignKey(d => d.ClimaId)
                     .HasConstraintName("FK_Noticia_Clima");
             });
+
+            modelBuilder.Entity<Historia>(entity =>
+            {
+
+                entity.HasIndex(e => e.HistoriaId)
+                    .HasName("IX_Historia");
+
+                entity.Property(e => e.HistoriaId).HasColumnName("Historia_id");
+                entity.Property(e => e.HistoriaInfo).HasColumnName("Historia_info");
+                entity.Property(e => e.CiudadId).HasColumnName("Ciudad_Id");
+
+                entity.HasOne(d => d.Ciudad)
+                   .WithMany(p => p.Historia)
+                   .HasForeignKey(d => d.CiudadId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Historia_Ciudad");
+            });
         }
+       
+        //public DbSet<StoreWebApi.Models.Historia> Historia { get; set; }
+
+        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //        {
+        //            if (!optionsBuilder.IsConfigured)
+        //            {
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+        //                optionsBuilder.UseSqlServer("Server= DESKTOP-PIB9MC0\\SQLEXPRESS;Database= SStoreDB;Integrated Security=SSPI");
+        //            }
+        //        }
+
+       
+        //public DbSet<StoreWebApi.Models.Historia> Historia { get; set; }
+
+        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //        {
+        //            if (!optionsBuilder.IsConfigured)
+        //            {
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+        //                optionsBuilder.UseSqlServer("Server= DESKTOP-PIB9MC0\\SQLEXPRESS;Database= SStoreDB;Integrated Security=SSPI");
+        //            }
+        //        }
+       
+        //public DbSet<StoreWebApi.Models.Historia> Historia { get; set; }
+
+        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //        {
+        //            if (!optionsBuilder.IsConfigured)
+        //            {
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+        //                optionsBuilder.UseSqlServer("Server= DESKTOP-PIB9MC0\\SQLEXPRESS;Database= SStoreDB;Integrated Security=SSPI");
+        //            }
+        //        }
+
+        //public DbSet<StoreWebApi.Models.Historia> Historia_1 { get; set; }
+
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer("Server= DESKTOP-PIB9MC0\\SQLEXPRESS;Database= SStoreDB;Integrated Security=SSPI");
+//            }
+//        }
+
+       
     }
 }
